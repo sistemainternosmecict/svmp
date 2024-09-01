@@ -4,6 +4,6 @@ Este diretório contém a documentação de requisitos para o projeto **SVMP** 1
 
 ## Índice
 
-1. [Requisitos Funcionais](./requisitos/requisitos-funcionais.md)
+1. [Requisitos Funcionais](./docs/requisitos/requisitos-funcionais.md)
 
 Por favor, navegue pelos documentos acima para mais detalhes sobre cada aspecto dos requisitos do projeto.
