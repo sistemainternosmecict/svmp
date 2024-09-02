@@ -1,6 +1,6 @@
-# Documentação de Requisitos e Código fonte do Sistema de Votaçao da Mostra Pedagógica
+# Documentação do SVMP
 
-Este diretório contém a documentação de requisitos e código fonte para o projeto **SVMP** 
+Este diretório contém a documentação de requisitos e código fonte para o projeto **SVMP** (Sistema de Votação da Mostra Pedagógica)
 
 ## Índice
 
@@ -9,7 +9,7 @@ Este diretório contém a documentação de requisitos e código fonte para o pr
 3. Projeto de software
 4. Código fonte
 
-Por favor, navegue pelos documentos acima para mais detalhes sobre cada aspecto do projeto.
+Por favor, navegue pelos liks acima para mais detalhes sobre cada aspecto do projeto.
 
-Subsecretaria de tecnologia
-Sala 24
+### Subsecretaria de tecnologia
+### Secretaria de educação (Sala 24)
