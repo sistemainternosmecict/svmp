@@ -1,0 +1,18 @@
+@startuml Diagrama1
+
+!theme mono
+left to right direction
+
+actor "Jurado" as jurado <<Usuário>>
+actor "Sistema" as sys <<App>>
+
+rectangle Sistema_interno {
+  usecase "Obter jurado" as UC1
+  usecase "Armazenar jurado" as UC2
+  usecase "Redirecionar jurado" as UC3
+}
+jurado - UC1
+UC1 .> UC2 : <<include>>
+UC2 .> UC3 : <<include>>
+
+@enduml
