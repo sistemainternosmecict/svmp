@@ -10,9 +10,30 @@ rectangle Sistema_interno {
   usecase "Obter jurado" as UC1
   usecase "Armazenar jurado" as UC2
   usecase "Redirecionar jurado" as UC3
+  usecase "Ver projeto" as UC4
+  usecase "Submeter votos" as UC5
+  usecase "Confirmar voto" as UC6
+  usecase "Contar pontuacao" as UC7
+  usecase "Rankear projetos" as UC8
+  usecase "Desempatar rank" as UC9
+  usecase "Persistir dados" as UC10
+  usecase "Capturar listagem" as UC11
+  usecase "Renderizar dados" as UC12
 }
 jurado - UC1
 UC1 .> UC2 : <<include>>
 UC2 .> UC3 : <<include>>
+
+jurado - UC4
+jurado - UC5
+jurado - UC6
+
+sys - UC7
+UC7 .> UC8 : <<include>>
+UC8 .> UC9 : <<include>>
+UC9 .> UC10 : <<include>>
+
+sys - UC11
+UC11 .> UC12 : <<include>>
 
 @enduml
