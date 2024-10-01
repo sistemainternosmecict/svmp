@@ -3,34 +3,25 @@
 actor Usuario as j
 boundary Navegador as br <<View>>
 control Flask as fl <<Controller>>
-entity Colecao_de_votos as cv
-entity Voto <<ORM/model>>
+entity Jurado as mj <<class>>
+entity tb_jurado as tj <<model>>
 database db_svmp as tb
 
-j -> br : clique em Entrar
+j -> br : clica em registrar
 activate br
-br -> fl : rota = "/voto/registrar"
+br -> fl : rota = "/jurado/registrar"
 activate fl
-fl -> fl : verificar_dados(dados):dict
-activate fl
-fl -> cv **
-fl -> cv : agregar_votos(dados)
-activate cv
-cv -> Voto **
-cv -> Voto : registrar_voto(dados):dict
-activate Voto
-Voto -> tb : insert
+fl -> mj ** : instancia(nome:str, instituicao:str)
+fl -> mj : registrar_jurado()
+activate mj
+mj -> tj ** : orm
+mj -> tj : registrar_jurado(dados:dict):dict
+activate tj
+tj -> tb : insert
 activate tb
-tb --> Voto : ultimo_id_inserido
-deactivate
-Voto --> fl : dict
-deactivate
-deactivate
-
-fl --> br : JSON
-deactivate fl
-deactivate fl
-br --> j : "registrado"
-deactivate br
-
+return id_ultimo_inserido
+return dict
+return dict
+return JSON
+return "Jurado registrado"
 @enduml

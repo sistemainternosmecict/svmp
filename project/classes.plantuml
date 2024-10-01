@@ -30,7 +30,9 @@ class Jurado {
     -id:int
     -nome:str
 -instituicao:str
+    +Jurado(nome, instituicao):bool
     +definir_nome(nome:str):bool
+    +definir_instituicao(instituicao:str):bool
     +registrar_jurado():dict
 +carregar_jurado_por_id(id:int)
 +carregar_jurado_por_nome(nome:str)
@@ -80,7 +82,7 @@ class Gestor_projetos {
 package modelos {
 package orm <<SQLAlchemy>> {
 class tb_jurados{
-+registrar_jurado(dados:dict):bool
++registrar_jurado(dados:dict):dict
 +ler_jurados():list
 +ler_jurado_id(id:int):list
 +ler_jurado_nome(nome:str):list
