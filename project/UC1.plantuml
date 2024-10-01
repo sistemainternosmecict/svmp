@@ -1,0 +1,36 @@
+@startuml
+!theme plain
+actor Usuario as j
+boundary Navegador as br <<View>>
+control Flask as fl <<Controller>>
+entity Colecao_de_votos as cv
+entity Voto <<ORM/model>>
+database db_svmp as tb
+
+j -> br : clique em Entrar
+activate br
+br -> fl : rota = "/voto/registrar"
+activate fl
+fl -> fl : verificar_dados(dados):dict
+activate fl
+fl -> cv **
+fl -> cv : agregar_votos(dados)
+activate cv
+cv -> Voto **
+cv -> Voto : registrar_voto(dados):dict
+activate Voto
+Voto -> tb : insert
+activate tb
+tb --> Voto : ultimo_id_inserido
+deactivate
+Voto --> fl : dict
+deactivate
+deactivate
+
+fl --> br : JSON
+deactivate fl
+deactivate fl
+br --> j : "registrado"
+deactivate br
+
+@enduml

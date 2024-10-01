@@ -6,10 +6,12 @@ left to right direction
 package dbsistec <<Database>> {
 }
 
-package modules.votos {
+package modules.votacao {
 class Voto {
     -criterio:int
     -valor_voto:int
+    +Voto(criterio:int, valor:int):Voto
+    +definir_criterio(criterio:int):bool
     +definir_valor(valor:int):bool
     +obter_voto():dict
     +registrar_voto():bool
@@ -29,7 +31,6 @@ class Jurado {
     -nome:str
 -instituicao:str
     +definir_nome(nome:str):bool
-    +submeter_votos(votos:Colecao_de_votos):bool
     +registrar_jurado():dict
 +carregar_jurado_por_id(id:int)
 +carregar_jurado_por_nome(nome:str)
@@ -59,13 +60,20 @@ class Rank{
 
 package modules.projetos {
 class Projeto{
+-id:int
 -nome_projeto
 -unidade:str
--membros:list
+-membros:list[dict]
 -descricao:str
 -link:str
-+carregar_projeto(dados:list)
++carregar_projeto_id(id:int)
++carregar_projeto_nome(nome_parte:str)
 +obter_projeto():dict
++registrar_projeto(dados:dict):dict
+}
+
+class Gestor_projetos {
+-projetos_lista:list
 }
 }
 
@@ -83,7 +91,7 @@ class tb_votos {
 +ler_votos_projeto(id_projeto:id):list
 } 
 class tb_projetos{
-+registrar_projeto(dados:dict):bool
++registrar_projeto(dados:dict):dict
 +ler_projetos():list
 +ler_projeto_id(id:int):list
 +ler_projeto_nome(nome_ou_parte:str):list
@@ -97,15 +105,14 @@ package View <<Node>>{
 package Flask as fl <<Node>>{
 } 
 
-Jurado -- Colecao_de_votos
-Jurado -left- Ferramentas
+Jurado -- Ferramentas
 Colecao_de_votos o-left- Voto
 Voto -- Processador_votos
 Processador_votos -- tb_votos
 tb_votos -- dbsistec
 tb_jurados -- dbsistec
 tb_projetos -- dbsistec
-Voto -left- tb_votos
+Voto -- tb_votos
 Jurado -- tb_jurados
 Projeto -- tb_projetos
 Rank -left- Processador_votos
