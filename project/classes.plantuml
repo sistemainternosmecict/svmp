@@ -1,0 +1,115 @@
+@startuml Diagrama1
+!theme plain
+
+left to right direction
+
+package dbsistec <<Database>> {
+}
+
+package modules.votos {
+class Voto {
+    -criterio:int
+    -valor_voto:int
+    +definir_valor(valor:int):bool
+    +obter_voto():dict
+    +registrar_voto():bool
+}
+
+class Colecao_de_votos {
+    -votos:list[Voto]
+    +agregarVoto(voto:Voto):bool
+    +obter_votos():list
+    +registrar_votos():bool
+}
+} 
+
+package modules.jurado{
+class Jurado {
+    -id:int
+    -nome:str
+-instituicao:str
+    +definir_nome(nome:str):bool
+    +submeter_votos(votos:Colecao_de_votos):bool
+    +registrar_jurado():dict
++carregar_jurado_por_id(id:int)
++carregar_jurado_por_nome(nome:str)
+}
+}
+
+package modules.utils {
+class Ferramentas {
+-criterios:list
++gerar_id_jurado():int
++obter_criterios():list
+} 
+}
+
+package modules.nucleo{
+class Processador_votos{
+-votos:list[Voto]
++processar():dict
++obter_votos():list
+}
+
+class Rank{
+-listagem:list
++ordenar_por_pontuacao()
+}
+}
+
+package modules.projetos {
+class Projeto{
+-nome_projeto
+-unidade:str
+-membros:list
+-descricao:str
+-link:str
++carregar_projeto(dados:list)
++obter_projeto():dict
+}
+}
+
+package modelos {
+package orm <<SQLAlchemy>> {
+class tb_jurados{
++registrar_jurado(dados:dict):bool
++ler_jurados():list
++ler_jurado_id(id:int):list
++ler_jurado_nome(nome:str):list
+} 
+class tb_votos {
++registrar_voto(dados:dict):bool
++ler_votos():list
++ler_votos_projeto(id_projeto:id):list
+} 
+class tb_projetos{
++registrar_projeto(dados:dict):bool
++ler_projetos():list
++ler_projeto_id(id:int):list
++ler_projeto_nome(nome_ou_parte:str):list
+}
+} 
+}
+
+package View <<Node>>{
+}
+
+package Flask as fl <<Node>>{
+} 
+
+Jurado -- Colecao_de_votos
+Jurado -left- Ferramentas
+Colecao_de_votos o-left- Voto
+Voto -- Processador_votos
+Processador_votos -- tb_votos
+tb_votos -- dbsistec
+tb_jurados -- dbsistec
+tb_projetos -- dbsistec
+Voto -left- tb_votos
+Jurado -- tb_jurados
+Projeto -- tb_projetos
+Rank -left- Processador_votos
+View - fl
+fl -- modules
+
+@enduml

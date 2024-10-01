@@ -1,6 +1,6 @@
 @startuml Diagrama1
+!theme plain
 
-!theme mono
 left to right direction
 
 actor "Jurado" as jurado <<Usuário>>
@@ -20,20 +20,20 @@ rectangle Sistema_interno {
   usecase "Capturar listagem" as UC11
   usecase "Renderizar dados" as UC12
 }
-jurado - UC1
-UC1 .> UC2 : <<include>>
+jurado -- UC1
+UC1 ..> UC2 : <<include>>
 UC2 .> UC3 : <<include>>
 
 jurado - UC4
 jurado - UC5
 jurado - UC6
 
-sys - UC7
-UC7 .> UC8 : <<include>>
+sys -- UC7
+UC7 ..> UC8 : <<include>>
 UC8 .> UC9 : <<include>>
 UC9 .> UC10 : <<include>>
 
-sys - UC11
+sys -- UC11
 UC11 .> UC12 : <<include>>
 
 @enduml
